@@ -1,0 +1,12 @@
+import pandas as pd
+df = pd.read_csv("train.csv")
+print("Missing values:")
+print(df.isnull().sum())
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+df["Embarked"] = df["Embarked"].fillna(df["Embarked"].mode()[0])
+df.drop(columns=["Cabin"], inplace=True)
+df.drop_duplicates(inplace=True)
+print("\nData types:")
+print(df.dtypes)
+df.to_csv("cleaned_titanic.csv", index=False)
+print("\nData cleaning completed successfully!")
